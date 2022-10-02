@@ -1,11 +1,82 @@
 ---
 title: 'PSTAT 131: Homework 1'
 author: "Lily Li"
-date: '2022-09-29'
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+## Machine Learning Main Ideas
+## Q1. 
+#### Differences between unsupervised and supervised learning: 
 
+Supervised learning is when an algorithm is trained using labeled predictors (predictors are classified having certain characteristics) corresponding with response variables. Supervised learning is more accurate since a machine can "practice" on a data set before predicting responses of new observations. According to the second lecture, supervised learning can be used for predicting and inferring the relationship between the predictors and response variables.
+
+Unsupervised sifts through unlabeled data (predictor measurements with no corresponding response) to find patterns. This can be used to discover new information and clustering.
+
+## Q2. 
+#### Differences between a regression model and a classification model in supervised learning:
+
+Regression models are used to predict numeric/quantitative outputs (i.g. wage, market price). 
+
+Classification models are used to predict categorical/qualitative outputs (predict the label or category given input variables; i.g. pass/no pass).
+
+## Q3. 
+#### Name two commonly used metrics for regression ML problems:
+
+Training Mean Squared Error: use this this to get an idea of the performance of our machine learning algorithm on our training data set {$(x_1, y_1),...,(x_n, y_n)$}. Training MSE is the average of the accumulated squared difference between the actual response from the training data and the predicted response of the training data. We learned form class that this can be written $\frac{1}{n} \sum_{i=1}^{n} (y_i- \hat{f}(x_i))^2$
+
+Test Mean Squared Error: Using new observations known as the test data set {$(\tilde{x}_1, \tilde{y}_1),...,(\tilde{x}_m, \tilde{y}_m)$}, we can attempt to find the model $\hat{f}$ that has the smallest Test MSE to better fit to the true response variable. This is important since the test data set can differ form our training data set. We learned form class that this can be written $\frac{1}{m}\sum_{i=1}^{m} (\tilde{y_i}- \hat{f}(\tilde{x_i}))^2$
+
+#### Name two commonly used metrics for classification ML problems:
+Training Error Rate: average error from predicting the response on observations used to train a machine learning algorithm. From the second lecture, we learned that this is equal to $\frac{1}{n}\sum_{i=1}^{n} I(y_i \neq \hat{y}_i)$ This gives a fraction corresponding to incorrect classifications by averaging the accumulated indicator function where observations are actual training set response is different from the predicted training set response.
+
+Test Error Rate: average error from predicting the response of a new observation, not using the algorithm used on the training data set since the training error rate isn't always a good estimate of the test error. From lecture, the equation is $\frac{1}{m}\sum_{i=1}^{m} I(\tilde{y}_i \neq \hat{\tilde{y}}_i)$. This tells us the incorrectness of our algorithm on the test data set.
+
+## Q4.
+#### Descriptive models:
+
+made to visually show patterns/clusters in data, so decisions can be made based on the shape of the data on a graph.
+
+#### Inferential models: 
+
+used to test the relationship between predictors and the output variable. This model infers properties of the data to be tested and may provide estimates and confidence bands.
+
+#### Predictive models:
+
+attempts to find which variables in the training data set can be combined to create a model to best predict future responses with minimum reducible error.
+
+## Q5.
+#### Define mechanistic. Define empirically-driven. How do these model types differ? How are they similar?
+
+Mechanistic models make predictions based on a known algorithm or theory. The professor refers to this as having a parametric form to follow such as $\beta_0 + \beta_1 + ...$ where the response is equal to the sum of continuous functions (dependent variables/predictors) of a parameter. In result, they won't match the true unknown $f$, but additional parameters (predictors) can be added for the model to better represent the complex data.
+
+Empirically-driven focus on known observations instead of parametric form so we don't assume the behavior of $f$. This means that the model learns from the given data and better fits the training data set, but requires a large set of observations. Both model types are similar in the way that they are prone to overfitting, which can be described as building a model or algorithm for patterns that don't exist. The professor calls this "predicting white noise".
+
+#### In general, is a mechanistic or empirically-driven model easier to understand? Explain your choice.
+
+Empirically-driven models as a concept are easier to understand since the models can be altered based on the known data. Mechanistic models are widely used but are more difficult to understand since we have to pick and manipulate our predictors for a parametric form to follow; it requires that we make assumptions about the data and heavily question the error/validity of our model. Empirically-driven models remind me of some concepts in Bayesian data analysis in the way that we update the model based on evidence from more data.
+
+#### Describe how the bias-variance tradeoff is related to the use of mechanistic or empirically-driven models.
+
+Mechanistic models may have high bias (differences between the actual and predicted data) since makes predictions on parametric form and doesn't focus on complexities in the training data set.
+
+Empirically-driven models may have high variances (spread out data) since fluctuations are reflected in the model by learning from the training data set
+
+## Q6.
+
+A political candidate’s campaign has collected some detailed voter history data from their constituents. The campaign is interested in two questions:
+
+1) Given a voter’s profile/data, how likely is it that they will vote in favor of the candidate?
+
+2) How would a voter’s likelihood of support for the candidate change if they had personal contact with the candidate? 
+
+#### Classify each question as either predictive or inferential. Explain your reasoning for each.
+
+1) Inferential since the given voter profile tells use properties that can be used to infer on teh candidate preference; given voter data, we can determine some relationship to the output.
+
+2) Predictive since we can use "personal contact with the candidate" as a predictor of candidate preference and use this in combination of other features to adjust the model for accuracy. 
+
+## Exploratory Data Analysis
+## Q1.
