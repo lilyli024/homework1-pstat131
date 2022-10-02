@@ -79,4 +79,39 @@ A political candidate’s campaign has collected some detailed voter history dat
 2) Predictive since we can use "personal contact with the candidate" as a predictor of candidate preference and use this in combination of other features to adjust the model for accuracy. 
 
 ## Exploratory Data Analysis
-## Q1.
+```{r, message=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(corrplot)
+```
+## Exercise 1.
+```{r, message=FALSE}
+data("mpg")
+ggplot(mpg, aes(x=hwy)) +
+  geom_histogram() +
+  labs(x="Highway Miles per Gallon")
+
+```
+
+## Exercise 2.
+```{r}
+ggplot(mpg, aes(mpg, x=hwy, y=cty)) + 
+  geom_point() +
+  labs(x="Highway Miles per Gallon", y="City Miles per Gallon")
+```
+
+## Exercise 3.
+```{r}
+ggplot(mpg, aes(y = reorder(factor(manufacturer), manufacturer, function(x) -length(x)))) +
+  geom_bar() +
+  labs(y="Car Manufacturer")
+```
+
+## Exercise 4.
+```{r}
+ggplot(mpg, aes(hwy, cyl, group=cyl)) +
+  geom_boxplot() +
+  labs(x="Highway Miles per Gallon",y="Number of Cylinders")
+```
+
+## Exercise 5.
