@@ -93,12 +93,16 @@ ggplot(mpg, aes(x=hwy)) +
 
 ```
 
+#### Describe what you see/learn.
+
 ## Exercise 2.
 ```{r}
 ggplot(mpg, aes(mpg, x=hwy, y=cty)) + 
   geom_point() +
   labs(x="Highway Miles per Gallon", y="City Miles per Gallon")
 ```
+
+#### Describe what you notice. Is there a relationship between hwy and cty? What does this mean?
 
 ## Exercise 3.
 ```{r}
@@ -107,6 +111,10 @@ ggplot(mpg, aes(y = reorder(factor(manufacturer), manufacturer, function(x) -len
   labs(y="Car Manufacturer")
 ```
 
+#### Which manufacturer produced the most cars? Which produced the least?
+
+
+
 ## Exercise 4.
 ```{r}
 ggplot(mpg, aes(hwy, cyl, group=cyl)) +
@@ -114,4 +122,12 @@ ggplot(mpg, aes(hwy, cyl, group=cyl)) +
   labs(x="Highway Miles per Gallon",y="Number of Cylinders")
 ```
 
+#### Do you see a pattern?
+
 ## Exercise 5.
+```{r}
+num_mpg <- cor(select(mpg, displ, year, cyl, cty, hwy))
+corrplot(num_mpg, method="number", type="lower")
+```
+
+#### Which variables are positively or negatively correlated with which others? Do these relationships make sense to you? Are there any that surprise you?
