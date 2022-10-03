@@ -85,24 +85,29 @@ library(tidyverse)
 library(corrplot)
 ```
 ## Exercise 1.
-```{r, message=FALSE}
+```{r}
 data("mpg")
 ggplot(mpg, aes(x=hwy)) +
-  geom_histogram() +
+  geom_histogram(binwidth=2) +
   labs(x="Highway Miles per Gallon")
-
+summary(mpg$hwy)
 ```
 
 #### Describe what you see/learn.
 
+The histogram is skewed right meaning most cars are are the lower side of highway gas mileage. There appears to be two peaks, one somewhere around hwy = 17 and another around 26. There are outliers at hwy=41 and hwy=44.
+
 ## Exercise 2.
 ```{r}
 ggplot(mpg, aes(mpg, x=hwy, y=cty)) + 
-  geom_point() +
+  geom_point() + 
+  geom_smooth(method='lm') +
   labs(x="Highway Miles per Gallon", y="City Miles per Gallon")
 ```
 
 #### Describe what you notice. Is there a relationship between hwy and cty? What does this mean?
+
+Majority of points don't stray too far from the regression line, indicating a strong positive linear relationship between hwy and cty. Our current data suggests that an increase in hwy results in an increase in cty.
 
 ## Exercise 3.
 ```{r}
@@ -113,7 +118,7 @@ ggplot(mpg, aes(y = reorder(factor(manufacturer), manufacturer, function(x) -len
 
 #### Which manufacturer produced the most cars? Which produced the least?
 
-
+Dodge produced the most cars while Lincoln produced the least cars.
 
 ## Exercise 4.
 ```{r}
@@ -124,6 +129,8 @@ ggplot(mpg, aes(hwy, cyl, group=cyl)) +
 
 #### Do you see a pattern?
 
+Based the first and third quartile, most of the data is relatively close to the median hwy for 8 cylinder cars (lower variance); it appears to be skew right and to have a few large outliers. For 6 cylinder cars, the data is skew left with no apparent outliers. There is little data about 5 cylinder cars. Hwy data for 4 cylinder cars appears to be relatively evenly distributed around the median with a couple large outliers, but is the most spread out data (larger variance).
+
 ## Exercise 5.
 ```{r}
 num_mpg <- cor(select(mpg, displ, year, cyl, cty, hwy))
@@ -131,3 +138,5 @@ corrplot(num_mpg, method="number", type="lower")
 ```
 
 #### Which variables are positively or negatively correlated with which others? Do these relationships make sense to you? Are there any that surprise you?
+
+displ (engine displacement in litres; I learned that this is about the power, air, and fuel of an engine) and cyl (number of cylinders) have strong positive correlation, which makes sense since engine displacement is calcucuted using the number of cylinders.The features that have the strongest positive correlation are hwy (highway miles per gallon) and cty (city miles per gallon), which also makes sense since a car with features that result in poor highway mileage would most likely also have poor city mileage. It's interesting to learn that the number of cylinders has a strong negative correlation with both city and highway mileage. This means that more cylinders and higher engine displacement does not improve gas efficiency and actually results in lower highway and city mileage. 
